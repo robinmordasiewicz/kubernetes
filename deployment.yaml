@@ -1,0 +1,299 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-nfs-www
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    server: 192.168.1.17
+    path: "/volume1/nfs/www"
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-nfs-red
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    server: 192.168.1.17
+    path: "/volume1/nfs/red"
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-nfs-blue
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - hard
+    - nfsvers=4.1
+  nfs:
+    server: 192.168.1.17
+    path: "/volume1/nfs/blue"
+    readOnly: false
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-nfs-www
+spec:
+  storageClassName: ""
+  volumeName: pv-nfs-www
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-nfs-red
+spec:
+  storageClassName: ""
+  volumeName: pv-nfs-red
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-nfs-blue
+spec:
+  storageClassName: ""
+  volumeName: pv-nfs-blue
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: www
+  labels:
+    app: www-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: www-app
+  template:
+    metadata:
+      labels:
+        app: www-app
+    spec:
+      volumes:
+        - name: www-volume
+          persistentVolumeClaim:
+            claimName: pvc-nfs-www
+      containers:
+        - image: nginx
+          name: www-container
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+          volumeMounts:
+            - name: www-volume
+              mountPath: /usr/share/nginx/html
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: red
+  labels:
+    app: red-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: red-app
+  template:
+    metadata:
+      labels:
+        app: red-app
+    spec:
+      volumes:
+        - name: red-volume
+          persistentVolumeClaim:
+            claimName: pvc-nfs-red
+      containers:
+        - image: nginx
+          name: red-container
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+          volumeMounts:
+            - name: red-volume
+              mountPath: /usr/share/nginx/html
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue
+  labels:
+    app: blue-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blue-app
+  template:
+    metadata:
+      labels:
+        app: blue-app
+    spec:
+      volumes:
+        - name: blue-volume
+          persistentVolumeClaim:
+            claimName: pvc-nfs-blue
+      containers:
+        - image: nginx
+          name: blue-container
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: 512Mi
+              cpu: "1"
+            requests:
+              memory: 256Mi
+              cpu: "0.2"
+          volumeMounts:
+            - name: blue-volume
+              mountPath: /usr/share/nginx/html
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: www-service
+spec:
+  selector:
+    app: www-app
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  type: ClusterIP
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: red-service
+spec:
+  selector:
+    app: red-app
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  type: ClusterIP
+---
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: blue-service
+spec:
+  selector:
+    app: blue-app
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: www-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - host: www.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: www-service
+                port:
+                  number: 80
+          - path: /blue(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: blue-service
+                port:
+                  number: 80
+          - path: /red(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: red-service
+                port:
+                  number: 80
+    - host: red.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: red-service
+                port:
+                  number: 80
+    - host: blue.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: blue-service
+                port:
+                  number: 80
+---
