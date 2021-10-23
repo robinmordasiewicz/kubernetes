@@ -12,3 +12,6 @@ Fork the kubesperay repo
   -    git fetch upstream
   -    git merge upstream/master
   -    git push origin master
+  -
+  - git checkout -b work
+  - git push --set-upstream origin work
