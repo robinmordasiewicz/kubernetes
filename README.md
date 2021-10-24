@@ -2,21 +2,31 @@
 
 1. Initialize a repo
 
-  ```mkdir $HOME/kubernetes```
+   ```ShellSession
+      mkdir $HOME/kubernetes
+   ```
 
-  ```cd $HOME/kubernetes```
+   ```ShellSession
+      cd $HOME/kubernetes
+   ```
 
-  ```git init```
+   ```ShellSession
+      git init
+   ```
 
 2. [Integrate kubespray as a submodule to this repo](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/integration.md).
 
   - Add kubespray forked repo as submodule
 
-   ```git submodule add https://github.com/robinmordasiewicz/kubespray.git kubespray```
+   ```ShellSession
+      git submodule add https://github.com/robinmordasiewicz/kubespray.git kubespray
+   ```
 
   - Configure git to show submodule status
  
-  ```git config --global status.submoduleSummary true```
+   ```ShellSession
+      git config --global status.submoduleSummary true
+   ```
 
   - Add original kubespray repo as upstream
 
@@ -36,18 +46,18 @@
 
   - Create a new branch which you will use in your working environment:
 
-   ```git checkout -b work```
-
-   ```git pull https://github.com/robinmordasiewicz/kubespray.git work```
-
-   ```git push --set-upstream origin work```
+   ```ShellSession
+      git checkout -b work
+      git pull https://github.com/robinmordasiewicz/kubespray.git work
+      git push --set-upstream origin work
+   ```
 
 3. Copy kubespray/inventory/sample to cluster1
 
-  ```cd $HOME/kubernetes```
-
-  ```mkdir $HOME/kubernetes/inventory```
-
-  ```cp -a $HOME/kubernetes/kubespray/inventory/sample $HOME/kubernetes/inventory/cluster1```
+   ```ShellSession
+      cd $HOME/kubernetes
+      mkdir $HOME/kubernetes/inventory
+      cp -a $HOME/kubernetes/kubespray/inventory/sample $HOME/kubernetes/inventory/cluster1
+   ```
 
 > docker run --rm -it --mount type=bind,source="$(pwd)"/cluster1,dst=/inventory --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa robinhoodis/kubespray-ansible:arm64 bash
