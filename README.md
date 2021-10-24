@@ -62,5 +62,9 @@
       CONFIG_FILE=inventory/cluster1/hosts.yaml python3 kubespray/contrib/inventory_builder/inventory.py ${IPS[@]}
    ```
 
-
-> docker run --rm -it --mount type=bind,source="$(pwd)"/cluster1,dst=/inventory --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa robinhoodis/kubespray-ansible:arm64 bash
+4. Deploy the cluster
+   ```ShellSession
+      docker run --rm -it --mount type=bind,source=$HOME/kubernetes/inventory/cluster1,dst=/inventory \
+        --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa \
+        robinhoodis/kubespray-ansible:arm64 /bin/bash
+   ```
