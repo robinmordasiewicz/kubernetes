@@ -8,7 +8,9 @@
       git init
    ```
 
-2. [Integrate kubespray as a submodule to this repo](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/integration.md).
+2. [Integrate kubespray as a submodule to your repo](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/integration.md).
+
+  - Using your browser, visit the [kubespray repo](https://github.com/kubernetes-sigs/kubespray) and click "fork".
 
   - Add kubespray forked repo as submodule
 
