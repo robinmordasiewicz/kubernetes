@@ -20,7 +20,10 @@
 
   - Add original kubespray repo as upstream
 
-  ```cd $HOME/kubernetes/kubespray && git remote add upstream https://github.com/kubernetes-sigs/kubespray.git```
+   ```ShellSession
+      cd $HOME/kubernetes/kubespray
+      git remote add upstream https://github.com/kubernetes-sigs/kubespray.git
+   ```
 
   - Sync your master branch with upstream:
 
