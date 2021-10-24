@@ -4,13 +4,7 @@
 
    ```ShellSession
       mkdir $HOME/kubernetes
-   ```
-
-   ```ShellSession
       cd $HOME/kubernetes
-   ```
-
-   ```ShellSession
       git init
    ```
 
