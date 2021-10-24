@@ -8,14 +8,14 @@
 
   ```git init```
 
-1. [Integrate kubespray as a submodule to this repo](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/integration.md).
+2. [Integrate kubespray as a submodule to this repo](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/integration.md).
 
   - Add kubespray forked repo as submodule
 
    ```git submodule add https://github.com/robinmordasiewicz/kubespray.git kubespray```
 
   - Configure git to show submodule status
-  
+ 
   ```git config --global status.submoduleSummary true```
 
   - Add original kubespray repo as upstream
@@ -24,19 +24,20 @@
 
   - Sync your master branch with upstream:
 
-   ```git checkout master```
+   ```ShellSession
+      git checkout master
+      git fetch upstream
+      git merge upstream/master
+      git push origin master
+   ```
 
-   ```git fetch upstream```
-
-   ```git merge upstream/master```
-
-   ```git push origin master```
+  - Create a new branch which you will use in your working environment:
 
    ```git checkout -b work```
 
    ```git push --set-upstream origin work```
 
-2. Copy kubespray/inventory/sample to cluster1
+3. Copy kubespray/inventory/sample to cluster1
 
   ```cd $HOME/kubernetes```
 
