@@ -48,21 +48,22 @@
      git push --set-upstream origin work
   ```
 
-4. Modify kubespray to work on Ubuntu nodes
+3. Modify kubespray to work on Ubuntu nodes
 
   - Ubuntu has grouped nf_conntrack_ipv4 and nf_conntrack_ipv6 modules together into a single module name called nf_conntrack. Update the kubespray repo to repo to probe module name nf_conntrack 
   - Edit the file $HOME/kubernetes/kubespray/roles/kubernetes/node/tasks/main.yml
   - Change all instances of the string "nf_conntrack_ipv4" to "nf_conntrack"
   - :%s,nf_conntrack_ipv4,nf_conntrack,g
 
-3. Copy the kubespray sample folder to your project and build your local inventory 
+4. Copy the kubespray sample folder to your project, adjust your parameters, and build your local inventory 
+
+  - Copy kubespray sample inventory to your repo inventory
 
   ```ShellSession
      cd $HOME/kubernetes
      mkdir $HOME/kubernetes/inventory
      cp -a $HOME/kubernetes/kubespray/inventory/sample $HOME/kubernetes/inventory/cluster1
   ```
-
   - Create your local inventory
 
   ```ShellSession
