@@ -59,7 +59,7 @@
    ```ShellSession
       cd $HOME/kubernetes
       declare -a IPS=(192.168.1.10 192.168.1.11 192.168.1.12 192.168.1.13 192.168.1.14 192.168.1.20 192.168.1.21)
-      CONFIG_FILE=inventory/mycluster/hosts.yaml python3 kubespray/contrib/inventory_builder/inventory.py ${IPS[@]}
+      CONFIG_FILE=inventory/cluster1/hosts.yaml python3 kubespray/contrib/inventory_builder/inventory.py ${IPS[@]}
    ```
 
 
