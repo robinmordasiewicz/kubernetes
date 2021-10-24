@@ -1,6 +1,6 @@
-# kubernetes
+# kubernetes using kubespray
 
-1. Initialize repo
+1. Initialize a repo
 
   ```mkdir $HOME/kubernetes```
 
@@ -20,7 +20,7 @@
 
   - Add original kubespray repo as upstream
 
-  ```cd kubespray && git remote add upstream https://github.com/kubernetes-sigs/kubespray.git```
+  ```cd $HOME/kubernetes/kubespray && git remote add upstream https://github.com/kubernetes-sigs/kubespray.git```
 
   - Sync your master branch with upstream:
 
@@ -40,6 +40,6 @@
 
   ```cd $HOME/kubernetes```
 
-  ```cp -a kubestray/inventory/sample inventory/cluster1```
+  ```cp -a $HOME/kubernetes/kubestray/inventory/sample $HOME/kubernetes/inventory/cluster1```
 
 > docker run --rm -it --mount type=bind,source="$(pwd)"/cluster1,dst=/inventory --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa robinhoodis/kubespray-ansible:arm64 bash
