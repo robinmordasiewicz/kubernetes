@@ -15,3 +15,7 @@ Fork the kubesperay repo
   -
   - git checkout -b work
   - git push --set-upstream origin work
+  -
+  - docker run --rm -it --mount type=bind,source="$(pwd)"/cluster1,dst=/inventory \ 
+  -   --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa \
+  -     robinhoodis/kubespray-ansible:arm64 bash
