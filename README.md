@@ -1,5 +1,13 @@
 # kubernetes
 
+1. Initialize repo
+
+  ```mkdir $HOME/kubernetes```
+
+  ```cd $HOME/kubernetes```
+
+  ```git init```
+
 1. [Integrate kubespray as a submodule to this repo](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/integration.md).
 
   - Add kubespray forked repo as submodule
