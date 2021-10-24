@@ -9,10 +9,15 @@ Fork the kubesperay repo
   - Sync your master branch with upstream:
 
 > git checkout master
+
 > git fetch upstream
+
 > git merge upstream/master
+
 > git push origin master
+
 > git checkout -b work
+
 > git push --set-upstream origin work
 
 `docker run --rm -it --mount type=bind,source="$(pwd)"/cluster1,dst=/inventory --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa robinhoodis/kubespray-ansible:arm64 bash`
