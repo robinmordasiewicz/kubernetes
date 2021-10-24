@@ -1,6 +1,7 @@
 # kubernetes
 
 Reference: https://github.com/kubernetes-sigs/kubespray/blob/master/docs/integration.md
+
 Fork the kubesperay repo
   - https://github.com/robinmordasiewicz/kubespray
   - git submodule add https://github.com/robinmordasiewicz/kubespray.git kubespray
@@ -20,4 +21,4 @@ Fork the kubesperay repo
 
 > git push --set-upstream origin work
 
-`docker run --rm -it --mount type=bind,source="$(pwd)"/cluster1,dst=/inventory --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa robinhoodis/kubespray-ansible:arm64 bash`
+> docker run --rm -it --mount type=bind,source="$(pwd)"/cluster1,dst=/inventory --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa robinhoodis/kubespray-ansible:arm64 bash
