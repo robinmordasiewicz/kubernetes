@@ -35,12 +35,16 @@
 
    ```git checkout -b work```
 
+   ```git pull https://github.com/robinmordasiewicz/kubespray.git work```
+
    ```git push --set-upstream origin work```
 
 3. Copy kubespray/inventory/sample to cluster1
 
   ```cd $HOME/kubernetes```
 
-  ```cp -a $HOME/kubernetes/kubestray/inventory/sample $HOME/kubernetes/inventory/cluster1```
+  ```mkdir $HOME/kubernetes/inventory```
+
+  ```cp -a $HOME/kubernetes/kubespray/inventory/sample $HOME/kubernetes/inventory/cluster1```
 
 > docker run --rm -it --mount type=bind,source="$(pwd)"/cluster1,dst=/inventory --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa robinhoodis/kubespray-ansible:arm64 bash
