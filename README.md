@@ -46,12 +46,21 @@
       git push --set-upstream origin work
    ```
 
-3. Copy kubespray/inventory/sample to cluster1
+3. Copy the kubespray sample folder to your project and build your local inventory 
 
    ```ShellSession
       cd $HOME/kubernetes
       mkdir $HOME/kubernetes/inventory
       cp -a $HOME/kubernetes/kubespray/inventory/sample $HOME/kubernetes/inventory/cluster1
    ```
+
+  - Create your local inventory
+
+   ```ShellSession
+      cd $HOME/kubernetes
+      declare -a IPS=(192.168.1.10 192.168.1.11 192.168.1.12 192.168.1.13 192.168.1.14 192.168.1.20 192.168.1.21)
+      CONFIG_FILE=inventory/mycluster/hosts.yaml python3 kubespray/contrib/inventory_builder/inventory.py ${IPS[@]}
+   ```
+
 
 > docker run --rm -it --mount type=bind,source="$(pwd)"/cluster1,dst=/inventory --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa robinhoodis/kubespray-ansible:arm64 bash
