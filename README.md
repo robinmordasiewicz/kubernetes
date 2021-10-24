@@ -1,6 +1,6 @@
 # kubernetes
 
-Reference: https://github.com/kubernetes-sigs/kubespray/blob/master/docs/integration.md
+1. [Integrate kubespray as a submodule for our clusters repo](https://github.com/kubernetes-sigs/kubespray/blob/master/docs/integration.md).
 
 Fork the kubesperay repo
   - https://github.com/robinmordasiewicz/kubespray
