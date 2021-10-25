@@ -78,11 +78,10 @@
      ## docker for docker, crio for cri-o and containerd for containerd.
      container_manager: containerd
   ```
-
+     * Or run the following sed command.
   ```ShellSession
      sed -i 's/^container_manager: docker$/container_manager: containerd/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
   ```
-     * Or run the following sed command.
 
 5. Enter your ubuntu node IP addresses and create your local inventory
 
