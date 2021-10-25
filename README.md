@@ -52,7 +52,7 @@
 
 3. Modify kubespray to work on Ubuntu nodes
 
-  - Ubuntu has grouped nf_conntrack_ipv4 and nf_conntrack_ipv6 modules together into a single module name called nf_conntrack. Update the kubespray repo to repo to probe module name nf_conntrack 
+  - Ubuntu has grouped nf_conntrack_ipv4 and nf_conntrack_ipv6 modules together into a single module name called nf_conntrack. Update the kubespray repo to probe module name nf_conntrack 
   - Edit the file $HOME/kubernetes/kubespray/roles/kubernetes/node/tasks/main.yml
   - Change all instances of the string "nf_conntrack_ipv4" to "nf_conntrack"
   - If you use vi enter this search and replace command ":%s/nf_conntrack_ipv4/nf_conntrack/g" or run the following sed command.
@@ -69,7 +69,7 @@
      cp -a $HOME/kubernetes/kubespray/inventory/sample $HOME/kubernetes/inventory/cluster1
   ```
 
-5. Modify kubespray config files
+5. Modify kubespray config files before cluster deployment.
 
   - Docker container runtime has been depracated so modify line 202 of $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml to enable containerd
 
@@ -79,7 +79,7 @@
      container_manager: containerd
   ```
 
-  - Or run the following sed command.
+    - Or run the following sed command.
 
   ```ShellSession
      sed -i 's/^container_manager: docker$/container_manager: containerd/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
