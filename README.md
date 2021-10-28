@@ -110,6 +110,18 @@
      sed -i 's/^# ingress_nginx_host_network: false$/ingress_nginx_host_network: false/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
   ```
 
+  - Enable MetalLB LoadBalancer. Modify line 140 of $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
+
+  ```ini
+     # MetalLB deployment 
+     metallb_enabled: true
+  ```
+     - Or run the following sed commands.
+
+  ```ShellSession
+     sed -i 's/^metallb_enabled: false$/metallb_enabled: true/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
+  ```
+
 5. Enter your ubuntu node IP addresses and create your local inventory
 
   ```ShellSession
