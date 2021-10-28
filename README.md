@@ -96,6 +96,20 @@
      sed -i 's/^helm_enabled: false$/helm_enabled: true/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
   ```
 
+  - Enable the NGINX ingress controller, and set host network to false since we will also enable MetalLB. Modify line 93, and 94 of $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
+
+  ```ini
+     # Nginx ingress controller deployment
+     ingress_nginx_enabled: true
+     ingress_nginx_host_network: false
+  ```
+     - Or run the following sed commands.
+
+  ```ShellSession
+     sed -i 's/^ingress_nginx_enabled: false$/ingress_nginx_enabled: true/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
+     sed -i 's/^# ingress_nginx_host_network: false$/ingress_nginx_host_network: false/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
+  ```
+
 5. Enter your ubuntu node IP addresses and create your local inventory
 
   ```ShellSession
