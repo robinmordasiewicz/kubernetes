@@ -136,7 +136,18 @@
   ```ShellSession
      sed -i 's/^# metallb_protocol: "bgp"$/metallb_protocol: "layer2"/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
   ```
-  - 
+
+  - Enable "strict arp" for MetalLB. Modify line 129 of $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
+
+  ```ini
+     # must be set to true for MetalLB to work
+     kube_proxy_strict_arp: true
+  ```
+     - Or run the following sed commands.
+
+  ```ShellSession
+     sed -i 's/^kube_proxy_strict_arp: false$/kube_proxy_strict_arp: true/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
+  ```
 
 5. Enter your ubuntu node IP addresses and create your local inventory
 
