@@ -126,6 +126,18 @@
      sed -i 's/^#   - "10.5.0.50-10.5.0.99"$/  - "192.168.1.193-192.168.1.200"/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
   ```
 
+  - Enable L2 connectivity between pods. Modify line 173 of $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
+
+  ```ini
+     metallb_protocol: "layer2"
+  ```
+     - Or run the following sed commands.
+
+  ```ShellSession
+     sed -i 's/^# metallb_protocol: "bgp"$/metallb_protocol: "layer2"/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
+  ```
+  - 
+
 5. Enter your ubuntu node IP addresses and create your local inventory
 
   ```ShellSession
