@@ -84,6 +84,18 @@
      sed -i 's/^container_manager: docker$/container_manager: containerd/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
   ```
 
+  - ETCD deploys with docker by default. Modify ETCD so that it runs under the host OS rather than docker runtime. Modify line 22 of $HOME/foo/inventory/cluster1/group_vars/etcd.yml
+
+  ```ini
+     ## Settings for etcd deployment type
+     etcd_deployment_type: host
+  ```
+     - Or run the following sed command.
+
+  ```ShellSession
+     sed -i 's/^etcd_deployment_type: docker$/etcd_deployment_type: host/g' $HOME/foo/inventory/cluster1/group_vars/etcd.yml
+  ```
+
   - Enable the "HELM" package manager for Kubernetes. Modify line 7 of $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
 
   ```ini
