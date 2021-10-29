@@ -108,6 +108,18 @@
      sed -i 's/^helm_enabled: false$/helm_enabled: true/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
   ```
 
+  - Enable the metrics collection. Modify line 16 of $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
+
+  ```ini
+     # Metrics Server deployment
+     metrics_server_enabled: true
+  ```
+     - Or run the following sed command.
+
+  ```ShellSession
+     sed -i 's/^metrics_server_enabled: false$/metrics_server_enabled: true/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
+  ```
+
   - Enable the NGINX ingress controller, and set host network to false since we will also enable MetalLB. Modify line 93, and 94 of $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/addons.yml
 
   ```ini
