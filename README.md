@@ -83,6 +83,18 @@
      sed -i 's/^cluster_name: cluster.local$/cluster_name: cluster1.example.com/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
   ```
 
+  - Download the admin.conf file. Modify line 236 of $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
+
+  ```ini
+     # Make a copy of kubeconfig on the host that runs Ansible in {{ inventory_dir  }}/artifacts
+     kubeconfig_localhost: true
+  ```
+     - Or run the following sed commands.
+
+  ```ShellSession
+     sed -i 's/^# kubeconfig_localhost: false$/kubeconfig_localhost: true/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
+  ```
+
   - Docker container runtime has been depracated so modify line 202 of $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml to enable containerd
 
   ```ini
@@ -183,18 +195,6 @@
 
   ```ShellSession
      sed -i 's/^kube_proxy_strict_arp: false$/kube_proxy_strict_arp: true/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
-  ```
-
-  - Download the admin.conf file. Modify line 236 of $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
-
-  ```ini
-     # Make a copy of kubeconfig on the host that runs Ansible in {{ inventory_dir  }}/artifacts
-     kubeconfig_localhost: true
-  ```
-     - Or run the following sed commands.
-
-  ```ShellSession
-     sed -i 's/^# kubeconfig_localhost: false$/kubeconfig_localhost: true/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
   ```
 
 
