@@ -198,7 +198,7 @@
   ```
 
 
-5. Enter your ubuntu node IP addresses and create your local inventory
+6. Enter your ubuntu node IP addresses and create your local inventory
 
   ```ShellSession
      cd $HOME/kubernetes
@@ -206,7 +206,7 @@
      CONFIG_FILE=inventory/cluster1/hosts.yaml python3 kubespray/contrib/inventory_builder/inventory.py ${IPS[@]}
   ```
 
-4. Deploy the cluster
+7. Deploy the cluster
 
   ```ShellSession
      docker run --rm -it --mount type=bind,source=$HOME/kubernetes/inventory/cluster1,dst=/inventory \
