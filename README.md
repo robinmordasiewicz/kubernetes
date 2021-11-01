@@ -197,7 +197,6 @@
      sed -i 's/^kube_proxy_strict_arp: false$/kube_proxy_strict_arp: true/g' $HOME/foo/inventory/cluster1/group_vars/k8s_cluster/k8s-cluster.yml
   ```
 
-
 6. Enter your ubuntu node IP addresses and create your local inventory
 
   ```ShellSession
@@ -212,4 +211,10 @@
      docker run --rm -it --mount type=bind,source=$HOME/kubernetes/inventory/cluster1,dst=/inventory \
        --mount type=bind,source="${HOME}"/.ssh/id_rsa,dst=/root/.ssh/id_rsa \
        robinhoodis/kubespray-ansible:arm64 /bin/bash
+  ```
+
+8. After the cluster has been deployed apply the LoadBalancer modification so that MetalLB provides ingress-nginx with IP addresses accessible outside the cluster.
+
+  ```ShellSession
+     kubectl apply -f $HOME/kubernetes/nginx-ingress-service.yaml
   ```
