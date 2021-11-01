@@ -213,8 +213,17 @@
        robinhoodis/kubespray-ansible:arm64 /bin/bash
   ```
 
-8. After the cluster has been deployed apply the LoadBalancer modification so that MetalLB provides ingress-nginx with IP addresses accessible outside the cluster.
+8. After the cluster has been deployed make the following modifications.
+
+  - Apply the LoadBalancer modification so that MetalLB provides ingress-nginx with IP addresses accessible outside the cluster.
 
   ```ShellSession
      kubectl apply -f $HOME/kubernetes/nginx-ingress-service.yaml
+  ```
+
+  - Install prometheus and grafana for cluster monitoring
+
+  ```ShellSession
+     helm repo add prometheus-community https://prometheus-community.github.io/helm-charts\nhelm repo update
+     helm install prometheus-grafana prometheus-community/kube-prometheus-stack
   ```
