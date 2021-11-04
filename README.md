@@ -221,9 +221,9 @@
      kubectl apply -f $HOME/kubernetes/nginx-ingress-service.yaml
   ```
 
-  - Install prometheus and grafana for cluster monitoring
+  - Install prometheus and grafana for cluster monitoring https://github.com/prometheus-operator/kube-prometheus
 
   ```ShellSession
      helm repo add prometheus-community https://prometheus-community.github.io/helm-charts\nhelm repo update
-     helm install prometheus-grafana prometheus-community/kube-prometheus-stack
+     helm install prometheus-grafana prometheus-community/kube-prometheus-stack --create-namespace --namespace metrics
   ```
